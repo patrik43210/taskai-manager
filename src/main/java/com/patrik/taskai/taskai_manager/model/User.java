@@ -22,7 +22,8 @@ public class User {
     private String email;
     private String password;
 
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
+    @JoinColumn(name = "role_id")
     private Role role;
 
 }

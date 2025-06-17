@@ -20,7 +20,7 @@ public class ApplicationUserDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         return User.withUsername(user.getEmail())
                 .password(user.getPassword())
-                .roles(user.getRole().name())
+                .roles(user.getRole().getName().name())
                 .build();
     }
 }

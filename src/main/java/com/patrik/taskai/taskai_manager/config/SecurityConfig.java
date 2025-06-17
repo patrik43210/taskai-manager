@@ -18,13 +18,16 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/swagger-ui/**",
+                                "/auth/register",
+                                "/auth/login",
                                 "/v3/api-docs/**",
-                                "/ping"
+                                "/swagger-ui/**",
+                                "/swagger-ui.html"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
-                .httpBasic(); // or formLogin(), or later JWT
+                .httpBasic(); // or remove this later when using JWT
+
         return http.build();
     }
 
@@ -33,3 +36,4 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 }
+

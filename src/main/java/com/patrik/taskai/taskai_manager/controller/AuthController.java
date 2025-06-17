@@ -1,5 +1,6 @@
 package com.patrik.taskai.taskai_manager.controller;
 
+import com.patrik.taskai.taskai_manager.dto.LoginRequest;
 import com.patrik.taskai.taskai_manager.dto.RegisterRequest;
 import com.patrik.taskai.taskai_manager.service.AuthService;
 import lombok.RequiredArgsConstructor;
@@ -19,5 +20,10 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterRequest request){
         return ResponseEntity.ok(authService.register(request));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginRequest request) {
+        return ResponseEntity.ok(authService.login(request));
     }
 }

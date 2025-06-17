@@ -3,7 +3,6 @@ package com.patrik.taskai.taskai_manager;
 import com.patrik.taskai.taskai_manager.dto.LoginRequest;
 import com.patrik.taskai.taskai_manager.dto.RegisterRequest;
 import com.patrik.taskai.taskai_manager.model.Role;
-import com.patrik.taskai.taskai_manager.model.RoleName;
 import com.patrik.taskai.taskai_manager.model.User;
 import com.patrik.taskai.taskai_manager.repository.UserRepository;
 import com.patrik.taskai.taskai_manager.service.AuthService;
@@ -54,7 +53,7 @@ class AuthServiceTest {
     @Test
     void shouldLoginAndReturnJwtToken() {
         LoginRequest req = new LoginRequest("test@example.com", "password123");
-        User user = new User(10L, "test@example.com", "hashedPass", new Role(1L, RoleName.USER));
+        User user = new User(10l,"test@example.com", "hashedPass", Role.USER);
 
         when(userRepository.findByEmail("test@example.com")).thenReturn(Optional.of(user));
         when(passwordEncoder.matches("password123", "hashedPass")).thenReturn(true);

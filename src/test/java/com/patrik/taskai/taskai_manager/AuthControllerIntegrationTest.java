@@ -32,4 +32,23 @@ class AuthControllerIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("User registered successfully"));
     }
+
+    @Test
+    void shouldLoginAndReturnToken() throws Exception {
+        // First register the user
+        RegisterRequest registerRequest = new RegisterRequest("login@test.com", "LoginPass123");
+
+        mockMvc.perform(post("/auth/register")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(registerRequest)))
+                .andExpect(status().isOk());
+
+        // Now login
+        mockMvc.perform(post("/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(registerRequest)))
+                .andExpect(status().isOk())
+                .andExpect(content().string(org.hamcrest.Matchers.containsString("."))); // JWT will contain two dots
+    }
+
 }
